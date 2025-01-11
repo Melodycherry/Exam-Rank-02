@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inter.c                                            :+:      :+:    :+:   */
+/*   union.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlaffita <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/11 13:03:04 by mlaffita          #+#    #+#             */
-/*   Updated: 2025/01/11 13:24:01 by mlaffita         ###   ########.fr       */
+/*   Created: 2025/01/11 13:30:03 by mlaffita          #+#    #+#             */
+/*   Updated: 2025/01/11 13:44:59 by mlaffita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,32 @@ int	already(char *str, char c, int index)
 	return (0);
 }
 
-void	inter(char *s1, char *s2)
+void	ft_union(char *s1, char *s2)
 {
 	int i;
-	int j;
+	int index;
+	char result[256] = {0};
 
-	i= 0;
-	while (s1[i] != '\0')
+	i = 0;
+	index = 0;
+	while (s1[i])
 	{
-		j =0;
-		while (s2[j] != '\0')
+		if (!already(result, s1[i], index))
 		{
-			if (s1[i] == s2[j] && !already(s1, s1[i], i))
-			{
-				write (1, &s1[i], 1);
-				break;
-			}
-			j++;	
+			result[index] = s1[i];
+			write(1, &s1[i], 1);
+			index++;
+		}
+		i++;
+	}
+	i = 0;
+while (s2[i])
+	{
+		if (!already(result, s2[i], index))
+		{
+			result[index] = s2[i];
+			write(1, &s2[i], 1);
+			index++;
 		}
 		i++;
 	}
@@ -51,7 +60,7 @@ int main (int argc, char *argv[])
 {
 	if (argc == 3)
 	{
-		inter (argv[1], argv[2]);
+		ft_union(argv[1], argv[2]);
 	}
 	write (1, "\n", 1);
 	return (0);
